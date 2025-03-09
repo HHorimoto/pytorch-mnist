@@ -9,5 +9,3 @@ python ./nn_main.py 2>&1 | tee ./log/$now/log.txt
 
 mv loss.png ./log/$now/
 mv model ./log/$now/
-
-deactivate
