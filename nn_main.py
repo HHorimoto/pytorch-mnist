@@ -2,6 +2,9 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 
+import sys
+import os
+import yaml
 import random
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,19 +20,25 @@ from src.models.coach import Coach
 from src.models.evaluate import evaluate
 from src.visualization.visualize import plot
 
-# Hyperparameters
-BATCH_SIZE = 64
-LR = 1e-3
-EPOCHS = 3
-CLASSES = 10
-
 def main():
+    # YAMLから設定ファイル読み込み
+    with open('config.yaml') as file:
+        config_file = yaml.safe_load(file)
+
+    print(config_file)
+
+    CLASSES = config_file['config']['classes']
+    EPOCHS = config_file['config']['epochs']
+    BATCH_SIZE = config_file['config']['batch_size']
+    LR = config_file['config']['learning_rate']
+    DROPOUT_PROB = config_file['config']['dropout_prob']
+
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     data_module = MNISTData(batch_size=BATCH_SIZE)
     train_loader, test_loader = data_module.get_dataloaders()
 
-    model = NNModel(classes=CLASSES, dropout_prob=.5).to(device)
+    model = NNModel(classes=CLASSES, dropout_prob=DROPOUT_PROB).to(device)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=LR)
 
