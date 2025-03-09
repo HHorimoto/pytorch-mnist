@@ -21,10 +21,9 @@ from src.models.evaluate import evaluate
 from src.visualization.visualize import plot
 
 def main():
-    # YAMLから設定ファイル読み込み
+
     with open('config.yaml') as file:
         config_file = yaml.safe_load(file)
-
     print(config_file)
 
     CLASSES = config_file['config']['classes']
