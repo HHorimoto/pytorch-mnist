@@ -1,5 +1,12 @@
 # venv
-.venv/
+.venv
 
 # data
-data/
+data/*
+!data/.gitkeep
+
+!src/data/
+!src/data/**
+
+# __pycache__
+__pycache__
