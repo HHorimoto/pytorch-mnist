@@ -48,8 +48,9 @@ def main():
     plot(train_loss, test_loss)
 
     trues, preds = evaluate(model, test_loader, device)
-    print(trues)
-    print(preds)
+    accuracy = accuracy_score(trues, preds)
+
+    print("accuracy", accuracy)
 
 if __name__ == "__main__":
     fix_seed()
