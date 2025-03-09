@@ -3,7 +3,7 @@
 
 # data
 data/*
-!data/.gitkeep
+!data/mnist.zip
 
 !src/data/
 !src/data/**

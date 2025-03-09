@@ -14,7 +14,7 @@ from PIL import Image
 from sklearn.metrics import accuracy_score
 
 from src.utils.seed import fix_seed
-from src.data.mnist_data import MNISTData
+from src.data.mnist_dataset import create_dataset
 from src.models.nn_model import NNModel
 from src.models.coach import Coach
 from src.models.evaluate import evaluate
@@ -26,6 +26,8 @@ def main():
         config_file = yaml.safe_load(file)
     print(config_file)
 
+    TRAIN_PATH = config_file['config']['train_path']
+    TEST_PATH = config_file['config']['test_path']
     CLASSES = config_file['config']['classes']
     EPOCHS = config_file['config']['epochs']
     BATCH_SIZE = config_file['config']['batch_size']
@@ -34,8 +36,7 @@ def main():
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    data_module = MNISTData(batch_size=BATCH_SIZE)
-    train_loader, test_loader = data_module.get_dataloaders()
+    train_loader, test_loader = create_dataset(TRAIN_PATH, TEST_PATH, BATCH_SIZE)
 
     model = NNModel(classes=CLASSES, dropout_prob=DROPOUT_PROB).to(device)
     loss_fn = nn.CrossEntropyLoss()
