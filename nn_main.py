@@ -14,6 +14,7 @@ from src.utils.seed import fix_seed
 from src.data.mnist_data import MNISTData
 from src.models.nn_model import NNModel
 from src.models.coach import Coach
+from src.models.evaluate import evaluate
 from src.visualization.visualize import plot
 
 # Hyperparameters
@@ -45,6 +46,10 @@ def main():
         test_loss.append(test_epoch_loss)
 
     plot(train_loss, test_loss)
+
+    trues, preds = evaluate(model, test_loader, device)
+    print(trues)
+    print(preds)
 
 if __name__ == "__main__":
     fix_seed()
