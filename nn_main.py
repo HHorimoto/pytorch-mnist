@@ -14,6 +14,7 @@ from src.utils.seed import fix_seed
 from src.data.mnist_data import MNISTData
 from src.models.nn_model import NNModel
 from src.models.coach import Coach
+from src.visualization.visualize import plot
 
 # Hyperparameters
 BATCH_SIZE = 64
@@ -42,14 +43,8 @@ def main():
         print("test loss: ", test_epoch_loss)
         train_loss.append(train_epoch_loss)
         test_loss.append(test_epoch_loss)
-    
-    plt.title("loss")
-    plt.xlabel("epoch")
-    plt.ylabel("loss")
-    plt.plot(train_loss, label='train')
-    plt.plot(test_loss, label='test')
-    plt.legend()
-    plt.savefig('loss.png')
+
+    plot(train_loss, test_loss)
 
 if __name__ == "__main__":
     fix_seed()
