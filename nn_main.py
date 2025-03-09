@@ -21,6 +21,7 @@ from src.visualization.visualize import plot
 BATCH_SIZE = 64
 LR = 1e-3
 EPOCHS = 3
+CLASSES = 10
 
 def main():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -28,7 +29,7 @@ def main():
     data_module = MNISTData(batch_size=BATCH_SIZE)
     train_loader, test_loader = data_module.get_dataloaders()
 
-    model = NNModel().to(device)
+    model = NNModel(classes=CLASSES).to(device)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=LR)
 
