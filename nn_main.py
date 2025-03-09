@@ -50,7 +50,9 @@ def main():
     trues, preds = evaluate(model, test_loader, device)
     accuracy = accuracy_score(trues, preds)
 
-    print("accuracy", accuracy)
+    print("accuracy: ", accuracy)
+
+    torch.save(model.state_dict(), "model")
 
 if __name__ == "__main__":
     fix_seed()
