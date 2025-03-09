@@ -2,11 +2,11 @@ import torch
 from torch import nn
 
 class NNModel(nn.Module):
-    def __init__(self, classes):
+    def __init__(self, classes, dropout_prob=.5):
         super(NNModel, self).__init__()
         self.flatten = nn.Flatten()
         self.relu = nn.ReLU()
-        self.dropout = nn.Dropout(.5)
+        self.dropout = nn.Dropout(dropout_prob)
 
         self.linear1 = nn.Linear(28*28, 512)
         self.linear2 = nn.Linear(512, 256)

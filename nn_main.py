@@ -29,7 +29,7 @@ def main():
     data_module = MNISTData(batch_size=BATCH_SIZE)
     train_loader, test_loader = data_module.get_dataloaders()
 
-    model = NNModel(classes=CLASSES).to(device)
+    model = NNModel(classes=CLASSES, dropout_prob=.5).to(device)
     loss_fn = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=LR)
 
