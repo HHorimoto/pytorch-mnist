@@ -2,7 +2,7 @@ import torch
 from torch import nn
 
 class NNModel(nn.Module):
-    def __init__(self):
+    def __init__(self, classes):
         super(NNModel, self).__init__()
         self.flatten = nn.Flatten()
         self.relu = nn.ReLU()
@@ -10,7 +10,7 @@ class NNModel(nn.Module):
 
         self.linear1 = nn.Linear(28*28, 512)
         self.linear2 = nn.Linear(512, 256)
-        self.linear3 = nn.Linear(256, 10)
+        self.linear3 = nn.Linear(256, classes)
 
     def forward(self, x):
         x = self.flatten(x)
