@@ -1,3 +1,4 @@
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -15,6 +16,7 @@ from sklearn.metrics import accuracy_score
 
 from src.utils.seed import fix_seed
 from src.data.mnist_dataset import create_dataset
+from src.models.nn_model import NNModel
 from src.models.cnn_model import CNNModel
 from src.models.coach import Coach
 from src.models.evaluate import evaluate
@@ -36,11 +38,20 @@ def main():
     DROPOUT_PROB = config_file['config']['dropout_prob']
     IS_AUGMENT = config_file['config']['is_augment']
 
+    MODEL_NAME = config_file['config']['model_name']
+
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     train_loader, test_loader = create_dataset(TRAIN_PATH, TEST_PATH, BATCH_SIZE, IS_AUGMENT)
 
-    model = CNNModel(classes=CLASSES, dropout_prob=DROPOUT_PROB).to(device)
+    if MODEL_NAME == "nn":
+        model = NNModel(classes=CLASSES, dropout_prob=DROPOUT_PROB).to(device)
+    elif MODEL_NAME == "cnn":
+        model = CNNModel(classes=CLASSES, dropout_prob=DROPOUT_PROB).to(device)
+    else:
+        print(model)
+        sys.exit()
+        
     loss_fn = nn.CrossEntropyLoss()
     optimizer = optim.SGD(model.parameters(), lr=LR)
 

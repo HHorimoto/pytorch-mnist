@@ -8,3 +8,5 @@ config:
 
   is_augment: False
   dropout_prob: .5
+
+  model_name: "cnn"
