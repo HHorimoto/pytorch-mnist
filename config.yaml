@@ -6,4 +6,5 @@ config:
   batch_size: 64
   learning_rate: 0.001
 
+  is_augment: False
   dropout_prob: .5

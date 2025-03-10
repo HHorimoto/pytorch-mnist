@@ -32,11 +32,13 @@ def main():
     EPOCHS = config_file['config']['epochs']
     BATCH_SIZE = config_file['config']['batch_size']
     LR = config_file['config']['learning_rate']
+
     DROPOUT_PROB = config_file['config']['dropout_prob']
+    IS_AUGMENT = config_file['config']['is_augment']
 
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-    train_loader, test_loader = create_dataset(TRAIN_PATH, TEST_PATH, BATCH_SIZE)
+    train_loader, test_loader = create_dataset(TRAIN_PATH, TEST_PATH, BATCH_SIZE, IS_AUGMENT)
 
     model = NNModel(classes=CLASSES, dropout_prob=DROPOUT_PROB).to(device)
     loss_fn = nn.CrossEntropyLoss()

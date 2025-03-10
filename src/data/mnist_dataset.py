@@ -1,16 +1,23 @@
 import torch
 from torch.utils.data import DataLoader
-from torchvision.transforms import ToTensor, Compose
+from torchvision.transforms import ToTensor, Compose, RandomRotation, RandomHorizontalFlip
 from PIL import Image
 import pathlib
 
 from src.utils.seed import worker_init_fn, generator
 
 class MNISTDataset(torch.utils.data.Dataset):
-    def __init__(self, dir_path):
-        self.transform = Compose([
-            ToTensor(),
-        ])
+    def __init__(self, dir_path, is_augment=False):
+        if is_augment:
+            self.transform = Compose([
+                RandomRotation(10),
+                RandomHorizontalFlip(),
+                ToTensor(),
+            ])
+        else:
+            self.transform = Compose([
+                ToTensor(),
+            ])
 
         self.image_paths = [str(p) for p in pathlib.Path(dir_path).glob("**/*.jpg")]
 
@@ -28,9 +35,9 @@ class MNISTDataset(torch.utils.data.Dataset):
         y = int(str(path.parent.name))
         return X, y
 
-def create_dataset(train_path, test_path, batch_size):
-    train_dataset = MNISTDataset(train_path)
-    test_dataset = MNISTDataset(test_path)
+def create_dataset(train_path, test_path, batch_size, is_augment=False):
+    train_dataset = MNISTDataset(train_path, is_augment)
+    test_dataset = MNISTDataset(test_path, is_augment)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True,
                               num_workers=2, pin_memory=True, worker_init_fn=worker_init_fn,)
