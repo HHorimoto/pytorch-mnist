@@ -3,10 +3,13 @@
 ## Usage
 
 ```bash
-git clone https://github.com/HHorimoto/pytorch-mnist.git
-cd pytorch-mnist
-unzip data/mnist.zip -d ./data/
-source run.sh
+$ git clone https://github.com/HHorimoto/pytorch-mnist.git
+$ cd pytorch-mnist
+$ ~/python3.10/bin/python3 -m venv .venv
+$ . .venv/bin/activate
+$ pip install -r requirements.txt
+$ unzip data/mnist.zip -d ./data/
+$ source run.sh
 ```
 
 ## Features
