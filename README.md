@@ -32,6 +32,6 @@ The table below shows the accuracy with and without dropout in a CNN model train
 
 | Epochs | With Augmentation | Without Augmentation |
 | ------ | :---------------: | :------------------: |
-| 10     |      0.3558       |        0.5777        |
-| 100    |      0.9559       |        0.9796        |
-| 500    |      0.9853       |        0.9919        |
+| 10     |      0.6016       |        0.5777        |
+| 100    |      0.9793       |        0.9796        |
+| 500    |      0.9922       |        0.9919        |

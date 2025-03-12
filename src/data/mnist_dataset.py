@@ -7,8 +7,8 @@ import pathlib
 from src.utils.seed import worker_init_fn, generator
 
 class MNISTDataset(torch.utils.data.Dataset):
-    def __init__(self, dir_path, is_augment=False):
-        if is_augment:
+    def __init__(self, is_train, dir_path, is_augment=False):
+        if is_augment and not is_train:
             self.transform = Compose([
                 RandomRotation(10),
                 RandomHorizontalFlip(),
@@ -36,8 +36,8 @@ class MNISTDataset(torch.utils.data.Dataset):
         return X, y
 
 def create_dataset(train_path, test_path, batch_size, is_augment=False):
-    train_dataset = MNISTDataset(train_path, is_augment)
-    test_dataset = MNISTDataset(test_path, is_augment)
+    train_dataset = MNISTDataset(True, train_path, is_augment)
+    test_dataset = MNISTDataset(False, test_path, is_augment)
 
     train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True,
                               num_workers=2, pin_memory=True, worker_init_fn=worker_init_fn,)
