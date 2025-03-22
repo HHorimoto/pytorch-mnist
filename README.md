@@ -21,9 +21,9 @@ The table below shows the accuracy with and without dropout in a CNN model.
 
 | Epochs | With Dropout | Without Dropout |
 | ------ | :----------: | :-------------: |
-| 10     |    0.5777    |     0.8634      |
-| 100    |    0.9796    |     0.9822      |
-| 500    |    0.9919    |     0.9877      |
+| 10     |    0.5777    |   **0.8634**    |
+| 100    |    0.9796    |   **0.9822**    |
+| 500    |  **0.9919**  |     0.9877      |
 
 ### Data Augmentation 
 The table below shows the accuracy with and without dropout in a CNN model trained with dropout.
@@ -32,6 +32,6 @@ The table below shows the accuracy with and without dropout in a CNN model train
 
 | Epochs | With Augmentation | Without Augmentation |
 | ------ | :---------------: | :------------------: |
-| 10     |      0.6016       |        0.5777        |
-| 100    |      0.9793       |        0.9796        |
-| 500    |      0.9922       |        0.9919        |
+| 10     |    **0.6016**     |        0.5777        |
+| 100    |      0.9793       |      **0.9796**      |
+| 500    |    **0.9922**     |        0.9919        |
